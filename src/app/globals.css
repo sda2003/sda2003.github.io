@@ -1,26 +1,278 @@
+/* app/globals.css */
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+/* Original theme animations */
+.animate-float {
+  animation: float linear infinite;
+}
+
+[data-animation-in="fadeInLeft"] {
+  animation: fadeInLeft 0.5s ease-out;
+}
+
+[data-animation-out="fadeOutLeft"] {
+  animation: fadeOutLeft 0.5s ease-out;
+}
+
+/* Original theme utility classes */
+.page_wrap.one-page-enabled {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* FIX: Remove overflow from container and allow natural height */
+.container.opened {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.background.gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bg-bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Preloader - Fix: Add display: none by default */
+.preloader {
+  z-index: 9999;
+  display: none; /* Hidden by default */
+  position: fixed;
+  inset: 0;
+  background: white;
+  transition: opacity 0.5s ease;
+}
+
+.preloader.active {
+  display: table; /* Show when active */
+}
+
+.preloader .centrize {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.preloader .centrize.full-width {
+  width: 100%;
+}
+
+.preloader .vertical-center {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cursor {
+  z-index: 9999;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+  height: 30px; /* Example size */
+  width: 30px;  /* Example size */
+  border-radius: 50%; /* This makes it a circle */
+  background-color: #333;
+  border: none 
+}
+
+/* Custom cursor states */
+.cursor.cursor-zoom {
+  transform: scale(1.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 680px) {
+  .page_wrap.one-page-enabled {
+    overflow-x: hidden;
+  }
+  
+  .container.opened {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+/* Original border line utilities */
+.border-line-v {
+  position: relative;
+}
+
+.border-line-v::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(120, 204, 109, 0.2), transparent);
+}
+
+.border-line-h {
+  position: relative;
+}
+
+.border-line-h::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(120, 204, 109, 0.2), transparent);
+}
+
+/* Custom scrollbar matching original theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 204, 109, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 204, 109, 0.8);
+}
+
+/* Selection color matching theme */
+::selection {
+  background-color: rgba(120, 204, 109, 0.3);
+  color: #333;
+}
+
+/* NEW: Improved content container styling */
+.content-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  /* Allow natural content flow */
+}
+
+/* Desktop layout - side by side */
+@media (min-width: 1024px) {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    min-height: 100vh;
+    overflow: visible; /* Allow content to be visible */
+  }
+}
+
+/* Tablet layout - stacked but still some side-by-side */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Mobile layout - stacked vertically */
+@media (max-width: 767px) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* Ensure page scrolls properly on all devices */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 1024px) {
+  .container.opened {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+  
+  .content-container {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+  
+  /* Ensure AboutSection is fully visible on mobile */
+  .about-section-fix {
+    margin-bottom: 2rem;
+  }
 }

@@ -5,19 +5,24 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "export": "next build --turbopack && next export",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy:gh-pages": "gh-pages -d out"
   },
   "dependencies": {
+    "lucide-react": "^0.555.0",
+    "next": "15.5.7",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.7"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "@types/tailwindcss": "^3.0.11",
     "eslint": "^9",
     "eslint-config-next": "15.5.7",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "gh-pages": "^5.0.0"
   }
 }
