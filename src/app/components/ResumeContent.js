@@ -65,7 +65,7 @@ export default function ResumeContent() {
             <p className="text-gray-500 text-sm mb-4">Ratmalana</p>
 
             <p className="text-gray-700 text-sm leading-relaxed mb-4">
-              Bachelor&apos;s degree in Computer Science. Pursuing studies as a 1st year student.
+              Bachelor's degree in Computer Science. Pursuing studies as a 1st year student.
             </p>
           </div>
 

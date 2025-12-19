@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// Produce a fully static export (replaces the old `next export` command)
-	output: 'export',
+	
 	eslint: {
 		// Allow builds to complete even if ESLint reports issues (safe for static exports)
 		ignoreDuringBuilds: true,

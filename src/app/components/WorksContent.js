@@ -105,7 +105,7 @@ export default function WorksContent() {
       {/* If no works in category */}
       {filteredWorks.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          {`No projects found in the "${activeCategory}" category.`}
+          No projects found in the "{activeCategory}" category.
         </div>
       )}
     </div>
